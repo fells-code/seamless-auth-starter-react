@@ -44,14 +44,14 @@ function MainView() {
   );
 }
 
-const AUTH_SERVER = import.meta.env.VITE_AUTH_SERVER;
+const AUTH_SERVER = "https://demo.seamlessauth.com";
 
 function ApplicationRoutes() {
   const { isAuthenticated } = useAuth();
 
   return (
     <Routes>
-      {!isAuthenticated ? (
+      {isAuthenticated ? (
         <>
           <Route path="/" element={<MainView />} />
           <Route path="*" element={<MainView />} />
