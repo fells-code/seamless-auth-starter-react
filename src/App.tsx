@@ -9,6 +9,7 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 
 function MainView() {
+  const { user, logout } = useAuth();
   const [count, setCount] = useState(0);
 
   return (
@@ -29,6 +30,7 @@ function MainView() {
         </a>
       </div>
       <h1>Vite + React + Seamless Auth</h1>
+      <h2>Welcome, {user?.email}</h2>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
@@ -40,11 +42,12 @@ function MainView() {
       <p className="read-the-docs">
         Click on the Vite, React, or Seamless Auth logos to learn more
       </p>
+      <button onClick={logout}> Logout </button>
     </>
   );
 }
 
-const AUTH_SERVER = "https://demo.seamlessauth.com";
+const AUTH_SERVER = "https://demo.seamlessauth.com/demo/";
 
 function ApplicationRoutes() {
   const { isAuthenticated } = useAuth();
