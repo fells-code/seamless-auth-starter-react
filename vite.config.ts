@@ -11,8 +11,8 @@ export default defineConfig(({ command }) => {
     ...(isDev && {
       server: {
         https: {
-          key: fs.readFileSync(".certs/key.pem"),
-          cert: fs.readFileSync(".certs/cert.pem"),
+          key: fs.readFileSync(".cert/key.pem"),
+          cert: fs.readFileSync(".cert/cert.pem"),
         },
         host: "localhost",
         port: 5001,
