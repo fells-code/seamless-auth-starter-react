@@ -9,8 +9,9 @@
     "lint": "eslint .",
     "preview": "vite preview"
   },
+  "author": "Fells Code LLC",
   "dependencies": {
-    "@seamless-auth/react": "^0.0.4-beta.10",
+    "@seamless-auth/react": "^0.0.4-beta.16",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-router": "^7.8.0"
