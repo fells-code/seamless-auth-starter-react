@@ -1,5 +1,6 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
 import fs from "fs";
 
 // https://vite.dev/config/
@@ -7,7 +8,7 @@ export default defineConfig(({ command }) => {
   const isDev = command === "serve";
 
   return {
-    plugins: [react()],
+    plugins: [react(), tailwindcss()],
     ...(isDev && {
       server: {
         https: {
