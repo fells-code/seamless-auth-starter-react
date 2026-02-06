@@ -1,7 +1,7 @@
 {
   "name": "seamless-auth-react-demo",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,7 +11,7 @@
   },
   "author": "Fells Code LLC",
   "dependencies": {
-    "@seamless-auth/react": "file:../seamless-auth-react",
+    "@seamless-auth/react": "0.0.6-beta.2",
     "@tailwindcss/vite": "^4.1.17",
     "lucide-react": "^0.554.0",
     "react": "^19.1.1",
