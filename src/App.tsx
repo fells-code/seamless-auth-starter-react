@@ -9,7 +9,7 @@ import MainLayout from "./layouts/Layout";
 import Waitlist from "./pages/Waitlist";
 import About from "./pages/About";
 
-const AUTH_SERVER = "https://web.seamlessauth.com/web";
+const AUTH_SERVER = "http://localhost:3000/";
 
 function ApplicationRoutes() {
   const { isAuthenticated } = useAuth();
@@ -40,7 +40,7 @@ function ApplicationRoutes() {
 const App = () => {
   return (
     <Router>
-      <AuthProvider apiHost={AUTH_SERVER} mode="web">
+      <AuthProvider apiHost={AUTH_SERVER} mode="server">
         <ApplicationRoutes />
       </AuthProvider>
     </Router>
