@@ -25,7 +25,7 @@ export default function ProtectedExample() {
         }
 
         const data = await res.json();
-        setBetaData(data.users);
+        setBetaData(data);
       } catch {
         setError(
           "The API rejected this request. This usually means the user does not have the required role.",

@@ -4,136 +4,109 @@ export default function About() {
       <div className="max-w-4xl mx-auto space-y-16">
         <header className="text-center space-y-4">
           <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white tracking-tight">
-            About Our Private Beta
+            About This Example
           </h1>
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            A transparent look at what we’re building, why we’re doing a
-            waitlist, and how early founders can shape the future of our
-            product.
+            This application is a reference implementation showing how to use
+            Seamless Auth across a frontend, API, and authentication server.
           </p>
         </header>
 
         <section className="space-y-6">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-            What We’re Building
+            What Seamless Auth Is
           </h2>
           <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-            This product is built for early-stage founders, indie developers,
-            and fast-moving teams who want powerful tools without the
-            complexity. Our mission is to remove friction, automate the painful
-            parts, and give founders the freedom to launch faster and iterate
-            with confidence.
+            Seamless Auth is a passwordless authentication system designed to be
+            embedded directly into your application. It avoids redirects,
+            external identity providers, and opaque session handling in favor of
+            explicit, self-hosted infrastructure.
           </p>
           <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-            The private beta includes a focused set of features designed to
-            validate our core ideas, gather real-world feedback, and ensure that
-            we’re solving the right problems before scaling.
+            Authentication state is managed using secure, HTTP-only cookies and
+            verified server-side by your API. This allows your frontend and
+            backend to share a consistent view of the user without exposing
+            sensitive tokens to the browser.
           </p>
         </section>
 
         <section className="space-y-6">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-            Why a Waitlist?
+            What This Template Demonstrates
           </h2>
           <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-            We want to work closely with our earliest users — founders who care
-            deeply about product quality and developer experience. A waitlist
-            helps us onboard teams in manageable waves, ensuring that everyone
-            receives attention, support, and a feedback loop that actually makes
-            an impact.
+            This project is intentionally minimal. It exists to demonstrate core
+            Seamless Auth concepts rather than serve as a production-ready
+            application.
           </p>
 
           <ul className="list-disc ml-6 text-gray-700 dark:text-gray-300 space-y-2">
-            <li>We onboard in small cohorts</li>
-            <li>We prioritize founders building in our problem space</li>
-            <li>We tailor onboarding sessions based on early feedback</li>
-            <li>
-              We ensure infrastructure and support are rock-solid before scaling
-            </li>
+            <li>Embedded login and logout using the Seamless Auth React SDK</li>
+            <li>Session-based authentication using HTTP-only cookies</li>
+            <li>Server-side session validation from an API</li>
+            <li>Role-based access control using user roles</li>
+            <li>A protected route accessible only to authenticated users</li>
           </ul>
         </section>
 
         <section className="space-y-6">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-            Who This Beta Is For
+            Protected Routes and Roles
           </h2>
           <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-            This early access phase is built for creators who want to move fast
-            and help shape the direction of the product. If you fall into one of
-            these groups, you’ll be right at home:
+            One of the routes in this application is restricted to users with
+            the{" "}
+            <code className="px-1 py-0.5 rounded bg-gray-200 dark:bg-gray-800">
+              betaUser
+            </code>{" "}
+            role.
+          </p>
+          <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+            This demonstrates how authorization decisions can be made in your
+            application based on roles issued by the auth server and verified by
+            your API.
+          </p>
+        </section>
+
+        <section className="space-y-6">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+            How to Use This Project
+          </h2>
+          <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+            This template is best used as a learning and experimentation tool.
+            You are encouraged to inspect the code, modify it, and adapt the
+            patterns to your own application.
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div className="rounded-xl border border-gray-200 dark:border-gray-800 p-6 bg-white dark:bg-gray-900">
-              <h3 className="font-semibold text-gray-900 dark:text-white">
-                Startup Founders
-              </h3>
-              <p className="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                Launching quickly and validating ideas without overhead.
-              </p>
-            </div>
+          <ul className="list-disc ml-6 text-gray-700 dark:text-gray-300 space-y-2">
+            <li>Explore how authentication state flows through the app</li>
+            <li>Review how the API validates user sessions</li>
+            <li>Experiment with roles and protected routes</li>
+            <li>Replace mock content with your own features</li>
+          </ul>
+        </section>
 
-            <div className="rounded-xl border border-gray-200 dark:border-gray-800 p-6 bg-white dark:bg-gray-900">
-              <h3 className="font-semibold text-gray-900 dark:text-white">
-                👩‍💻 Indie Hackers
-              </h3>
-              <p className="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                Building polished apps with limited time and resources.
-              </p>
-            </div>
+        <section className="space-y-6">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+            Learn More
+          </h2>
+          <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+            For a deeper explanation of Seamless Auth concepts, configuration
+            options, and deployment guidance, refer to the official
+            documentation.
+          </p>
 
-            <div className="rounded-xl border border-gray-200 dark:border-gray-800 p-6 bg-white dark:bg-gray-900">
-              <h3 className="font-semibold text-gray-900 dark:text-white">
-                Technical Teams
-              </h3>
-              <p className="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                Integrating quickly without reinventing infrastructure.
-              </p>
-            </div>
-
-            <div className="rounded-xl border border-gray-200 dark:border-gray-800 p-6 bg-white dark:bg-gray-900">
-              <h3 className="font-semibold text-gray-900 dark:text-white">
-                Early Adopters
-              </h3>
-              <p className="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                Passionate about giving feedback and shaping product direction.
-              </p>
-            </div>
+          <div className="text-center pt-4">
+            <a
+              href="https://docs.seamlessauth.com"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-block px-8 py-3 text-lg font-semibold rounded-lg 
+              bg-brand text-white hover:bg-brand-dark transition shadow-md"
+            >
+              View Seamless Auth Documentation
+            </a>
           </div>
-        </section>
-
-        <section className="space-y-6">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-            Our Promise to Early Users
-          </h2>
-          <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-            We’re committed to building with clarity, speed, and transparency.
-            As an early participant, you’ll get a direct line to the team,
-            faster turnaround on feedback, and long-term benefits as the product
-            grows.
-          </p>
-
-          <ul className="list-disc ml-6 text-gray-700 dark:text-gray-300 space-y-2">
-            <li>You will influence core product decisions</li>
-            <li>Your feedback will shape features before launch</li>
-            <li>You’ll experience the product before anyone else</li>
-            <li>You’ll help us build something truly meaningful</li>
-          </ul>
-        </section>
-
-        <section className="text-center pt-6">
-          <a
-            href="/waitlist"
-            className="inline-block px-8 py-3 text-lg font-semibold rounded-lg 
-            bg-brand text-white hover:bg-brand-dark transition shadow-md"
-          >
-            Join the Waitlist →
-          </a>
-
-          <p className="mt-4 text-gray-600 dark:text-gray-500 text-sm">
-            Help shape the future — start by joining our early adopter
-            community.
-          </p>
         </section>
       </div>
     </div>

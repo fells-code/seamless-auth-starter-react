@@ -5,22 +5,40 @@ export default function Login() {
     <div className="flex min-h-screen bg-white dark:bg-black">
       <div
         className="hidden lg:flex flex-col justify-center px-20 w-1/2 
-  bg-gradient-to-b from-[#2169a8] to-black text-white"
+        bg-gradient-to-b from-[#2169a8] to-black text-white"
       >
-        <div className="max-w-xl space-y-6">
-          <h1 className="text-6xl font-extrabold tracking-tight leading-[1.1]">
-            Seamless Auth Template
+        <div className="max-w-xl space-y-8">
+          <h1 className="text-5xl font-extrabold tracking-tight leading-tight">
+            Seamless Auth
           </h1>
 
-          <p className="text-2xl font-light leading-relaxed opacity-90">
-            An award-winning tagline for your money-making startup — simple,
-            elegant, and unforgettable.
+          <p className="text-xl font-light leading-relaxed opacity-90">
+            This application is a reference template demonstrating how to
+            integrate Seamless Auth into a frontend, API, and authentication
+            server.
           </p>
 
-          <p className="pt-8 text-lg font-medium opacity-90 flex items-center gap-2">
-            Join our exclusive private beta
-            <span className="text-2xl">→</span>
+          <p className="text-lg leading-relaxed opacity-90">
+            Authentication is embedded directly into the application. Sessions
+            are managed using secure, HTTP-only cookies and verified
+            server-side. No redirects or third-party identity providers are
+            involved.
           </p>
+
+          <div className="pt-6 text-sm opacity-80">
+            <p>This template is intended for learning and experimentation.</p>
+            <p className="mt-2">
+              Learn more in the Seamless Auth documentation:
+            </p>
+            <a
+              href="https://docs.seamlessauth.com"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-block mt-2 font-medium underline underline-offset-4"
+            >
+              docs.seamlessauth.com
+            </a>
+          </div>
         </div>
       </div>
 
@@ -29,7 +47,12 @@ export default function Login() {
           <Outlet />
 
           <p className="mt-10 text-sm text-center text-gray-600 dark:text-gray-400">
-            Protected by Seamless Auth — Secure, passwordless by design.
+            Authentication and session management provided by Seamless Auth.
+          </p>
+
+          <p className="mt-2 text-xs text-center text-gray-500 dark:text-gray-500">
+            See the documentation to understand how authentication state flows
+            from the auth server to the API and UI.
           </p>
         </div>
       </div>
