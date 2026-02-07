@@ -2,7 +2,6 @@ export default function About() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-black px-6 py-16">
       <div className="max-w-4xl mx-auto space-y-16">
-        {/* HEADER SECTION */}
         <header className="text-center space-y-4">
           <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white tracking-tight">
             About Our Private Beta
@@ -14,7 +13,6 @@ export default function About() {
           </p>
         </header>
 
-        {/* SECTION 1: WHAT WE’RE BUILDING */}
         <section className="space-y-6">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
             What We’re Building
@@ -33,7 +31,6 @@ export default function About() {
           </p>
         </section>
 
-        {/* SECTION 2: WHY A WAITLIST */}
         <section className="space-y-6">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
             Why a Waitlist?
@@ -56,7 +53,6 @@ export default function About() {
           </ul>
         </section>
 
-        {/* SECTION 3: WHO IT’S FOR */}
         <section className="space-y-6">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
             Who This Beta Is For
@@ -70,7 +66,7 @@ export default function About() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div className="rounded-xl border border-gray-200 dark:border-gray-800 p-6 bg-white dark:bg-gray-900">
               <h3 className="font-semibold text-gray-900 dark:text-white">
-                🚀 Startup Founders
+                Startup Founders
               </h3>
               <p className="mt-2 text-gray-600 dark:text-gray-400 text-sm">
                 Launching quickly and validating ideas without overhead.
@@ -88,7 +84,7 @@ export default function About() {
 
             <div className="rounded-xl border border-gray-200 dark:border-gray-800 p-6 bg-white dark:bg-gray-900">
               <h3 className="font-semibold text-gray-900 dark:text-white">
-                🧠 Technical Teams
+                Technical Teams
               </h3>
               <p className="mt-2 text-gray-600 dark:text-gray-400 text-sm">
                 Integrating quickly without reinventing infrastructure.
@@ -97,7 +93,7 @@ export default function About() {
 
             <div className="rounded-xl border border-gray-200 dark:border-gray-800 p-6 bg-white dark:bg-gray-900">
               <h3 className="font-semibold text-gray-900 dark:text-white">
-                ❤️ Early Adopters
+                Early Adopters
               </h3>
               <p className="mt-2 text-gray-600 dark:text-gray-400 text-sm">
                 Passionate about giving feedback and shaping product direction.
@@ -106,7 +102,6 @@ export default function About() {
           </div>
         </section>
 
-        {/* SECTION 4: OUR PROMISE */}
         <section className="space-y-6">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
             Our Promise to Early Users
@@ -126,7 +121,6 @@ export default function About() {
           </ul>
         </section>
 
-        {/* SECTION 5: CTA */}
         <section className="text-center pt-6">
           <a
             href="/waitlist"

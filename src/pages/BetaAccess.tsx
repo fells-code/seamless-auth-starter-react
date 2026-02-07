@@ -1,110 +1,168 @@
 import { useAuth } from "@seamless-auth/react";
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router";
+import { useEffect, useState } from "react";
 
-export default function BetaAccess() {
-  const { user } = useAuth();
-  const navigate = useNavigate();
+export default function ProtectedExample() {
+  const { user, isAuthenticated } = useAuth();
 
-  // You can replace this with a real API call later
-  const [inviteStatus, setInviteStatus] = useState("pending");
-  const [requesting, setRequesting] = useState(false);
-  const [requested, setRequested] = useState(false);
+  const [betaData, setBetaData] = useState<string[] | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  const hasBetaRole = user?.roles?.includes("betaUser");
 
   useEffect(() => {
-    // Mock: if user's email ends with "@allowed.com", auto-approve
-    if (user?.email?.endsWith("@allowed.com")) {
-      setInviteStatus("approved");
-    }
-  }, [user]);
+    if (!hasBetaRole) return;
 
-  async function handleRequestAccess() {
-    setRequesting(true);
+    const fetchBetaUsers = async () => {
+      try {
+        setLoading(true);
+        const res = await fetch(`${import.meta.env.VITE_API_URL}beta_users`, {
+          credentials: "include",
+        });
 
-    // Simulate API call
-    await new Promise((res) => setTimeout(res, 800));
+        if (!res.ok) {
+          throw new Error("Request was rejected by the API");
+        }
 
-    setRequested(true);
-    setRequesting(false);
+        const data = await res.json();
+        setBetaData(data.users);
+      } catch {
+        setError(
+          "The API rejected this request. This usually means the user does not have the required role.",
+        );
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBetaUsers();
+  }, [hasBetaRole]);
+
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-black px-4">
+        <div className="max-w-lg w-full bg-white dark:bg-gray-900 p-8 rounded-xl border border-gray-200 dark:border-gray-800 text-center">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+            Authentication Required
+          </h1>
+          <p className="mt-4 text-gray-700 dark:text-gray-400">
+            This page is only accessible to authenticated users. Sign in to
+            continue.
+          </p>
+        </div>
+      </div>
+    );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-black flex items-center justify-center px-4">
-      <div className="max-w-lg w-full bg-white dark:bg-gray-900 p-10 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-800">
-        {/* Header */}
-        <div className="text-center mb-10">
+    <div className="min-h-screen bg-gray-50 dark:bg-black px-6 py-16">
+      <div className="max-w-3xl mx-auto space-y-12">
+        <header className="space-y-4">
           <h1 className="text-3xl font-extrabold text-gray-900 dark:text-white">
-            Beta Access
+            Protected Route Example
           </h1>
-          <p className="mt-2 text-gray-600 dark:text-gray-400">
-            Welcome {user?.email || user?.phone}!
+          <p className="text-gray-700 dark:text-gray-400">
+            This page demonstrates how Seamless Auth handles authentication,
+            role-based authorization, and protected API access.
           </p>
-        </div>
+        </header>
 
-        {/* Approved State */}
-        {inviteStatus === "approved" && (
-          <div className="text-center">
-            <div className="p-6 bg-green-50 dark:bg-green-900/20 rounded-xl border border-green-300 dark:border-green-700">
-              <h2 className="text-2xl font-semibold text-green-700 dark:text-green-300">
-                You're In! 🎉
-              </h2>
+        <section className="space-y-4">
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+            Authentication
+          </h2>
+          <p className="text-gray-700 dark:text-gray-300">
+            You are currently signed in as{" "}
+            <span className="font-medium">{user?.email || user?.phone}</span>.
+            Access to this page is restricted to authenticated users.
+          </p>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+            Authorization
+          </h2>
+
+          {!hasBetaRole && (
+            <div className="p-6 rounded-xl border border-yellow-300 dark:border-yellow-700 bg-yellow-50 dark:bg-yellow-900/20">
+              <h3 className="font-semibold text-yellow-800 dark:text-yellow-300">
+                Missing Required Role
+              </h3>
               <p className="mt-2 text-gray-700 dark:text-gray-400">
-                You’ve been granted full access to the private beta.
+                Your account does not have the{" "}
+                <code className="px-1 py-0.5 rounded bg-gray-200 dark:bg-gray-800">
+                  betaUser
+                </code>{" "}
+                role. As a result, beta-only content and API requests are not
+                available.
               </p>
             </div>
+          )}
 
-            <button
-              onClick={() => navigate("/beta")}
-              className="w-full mt-8 py-3 rounded-lg bg-purple-600 text-white font-semibold hover:bg-purple-700 transition"
-            >
-              Enter the Beta →
-            </button>
-          </div>
-        )}
-
-        {/* Pending State */}
-        {inviteStatus === "pending" && !requested && (
-          <div className="text-center">
-            <div className="p-6 bg-purple-50 dark:bg-purple-900/20 rounded-xl border border-purple-300 dark:border-purple-700">
-              <h2 className="text-xl font-semibold text-purple-700 dark:text-purple-300">
-                Your Account Is Awaiting Approval
-              </h2>
+          {hasBetaRole && (
+            <div className="p-6 rounded-xl border border-green-300 dark:border-green-700 bg-green-50 dark:bg-green-900/20">
+              <h3 className="font-semibold text-green-800 dark:text-green-300">
+                Role Verified
+              </h3>
               <p className="mt-2 text-gray-700 dark:text-gray-400">
-                This beta is invite-only. Request access below and we’ll notify
-                you soon.
+                Your account includes the{" "}
+                <code className="px-1 py-0.5 rounded bg-gray-200 dark:bg-gray-800">
+                  betaUser
+                </code>{" "}
+                role. Beta-only content is available below.
               </p>
             </div>
+          )}
+        </section>
 
-            <button
-              onClick={handleRequestAccess}
-              disabled={requesting}
-              className="w-full mt-8 py-3 rounded-lg bg-purple-600 text-white font-semibold hover:bg-purple-700 transition disabled:opacity-50"
-            >
-              {requesting ? "Requesting..." : "Request Beta Access"}
-            </button>
-          </div>
-        )}
+        {hasBetaRole && (
+          <section className="space-y-4">
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+              Protected API Call
+            </h2>
 
-        {/* Requested State */}
-        {inviteStatus === "pending" && requested && (
-          <div className="text-center">
-            <div className="p-6 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-300 dark:border-blue-700">
-              <h2 className="text-xl font-semibold text-blue-700 dark:text-blue-300">
-                Request Sent!
-              </h2>
-              <p className="mt-2 text-gray-700 dark:text-gray-400">
-                You’re on the waitlist. We’ll email you once you’re approved.
+            {loading && (
+              <p className="text-gray-600 dark:text-gray-400">
+                Loading beta data from the API…
               </p>
-            </div>
+            )}
 
-            <button
-              disabled
-              className="w-full mt-8 py-3 rounded-lg bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-gray-300 font-semibold cursor-not-allowed"
-            >
-              Pending Approval
-            </button>
-          </div>
+            {error && (
+              <div className="p-4 rounded-lg border border-red-300 dark:border-red-700 bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300">
+                {error}
+              </div>
+            )}
+
+            {betaData && (
+              <div className="rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-4">
+                <pre className="text-sm text-gray-800 dark:text-gray-200 overflow-x-auto">
+                  {JSON.stringify(betaData, null, 2)}
+                </pre>
+              </div>
+            )}
+          </section>
         )}
+
+        <section className="space-y-4">
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+            Try It Yourself
+          </h2>
+          <p className="text-gray-700 dark:text-gray-300">
+            You can experiment with this behavior by modifying roles in
+            different parts of the system:
+          </p>
+
+          <ul className="list-disc ml-6 space-y-2 text-gray-700 dark:text-gray-300">
+            <li>Change the user roles returned by the auth server</li>
+            <li>Modify role checks in the frontend</li>
+            <li>Enforce or relax role requirements in the API</li>
+          </ul>
+
+          <p className="text-gray-700 dark:text-gray-300">
+            This demonstrates how Seamless Auth encourages explicit,
+            defense-in-depth authorization across your stack.
+          </p>
+        </section>
       </div>
     </div>
   );

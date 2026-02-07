@@ -25,7 +25,6 @@ export default function Navbar() {
           Seamless Auth - Template
         </Link>
 
-        {/* CENTER LINKS (desktop) */}
         <div className="hidden md:flex gap-10">
           {navLinks.map((link) => (
             <Link
@@ -35,17 +34,14 @@ export default function Navbar() {
             >
               {link.label}
 
-              {/* Animated underline */}
               <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-[#2169a8] group-hover:w-full transition-all duration-300" />
             </Link>
           ))}
         </div>
 
-        {/* RIGHT SIDE */}
         <div className="hidden md:flex items-center gap-5">
           {isAuthenticated ? (
             <div className="relative">
-              {/* Avatar / initials */}
               <button
                 onClick={() => setDropdownOpen(!dropdownOpen)}
                 className="h-9 w-9 rounded-full bg-[#2169a8] text-white flex items-center justify-center font-semibold"
@@ -53,7 +49,6 @@ export default function Navbar() {
                 {user?.email?.[0]?.toUpperCase() ?? "U"}
               </button>
 
-              {/* Dropdown */}
               {dropdownOpen && (
                 <div className="absolute right-0 mt-3 w-48 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg shadow-lg py-1 z-20">
                   <div className="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">
@@ -93,7 +88,6 @@ export default function Navbar() {
           )}
         </div>
 
-        {/* MOBILE MENU BUTTON */}
         <button
           className="md:hidden text-gray-700 dark:text-gray-300"
           onClick={() => setMobileOpen(!mobileOpen)}
@@ -102,7 +96,6 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* MOBILE MENU */}
       {mobileOpen && (
         <div className="md:hidden bg-white dark:bg-black border-t border-gray-200 dark:border-gray-800 px-4 py-4 space-y-4">
           {navLinks.map((link) => (

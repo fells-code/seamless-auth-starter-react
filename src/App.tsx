@@ -6,7 +6,6 @@ import "./App.css";
 import Login from "./pages/Login";
 import BetaAccess from "./pages/BetaAccess";
 import MainLayout from "./layouts/Layout";
-import Waitlist from "./pages/Waitlist";
 import About from "./pages/About";
 
 const AUTH_SERVER = "http://localhost:3000/";
@@ -17,7 +16,6 @@ function ApplicationRoutes() {
   return (
     <Routes>
       <Route path="/*" element={<MainLayout />}>
-        <Route path="waitlist" element={<Waitlist />} />
         <Route path="about" element={<About />} />
         {isAuthenticated ? (
           <>
