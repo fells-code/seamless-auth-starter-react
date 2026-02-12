@@ -8,7 +8,7 @@ import MainLayout from "./layouts/Layout";
 import About from "./pages/About";
 import Home from "./pages/Home";
 
-const AUTH_SERVER = "http://localhost:3000/";
+const AUTH_SERVER = import.meta.env.VITE_AUTH_SERVER_URL;
 
 function ApplicationRoutes() {
   return (
