@@ -16,7 +16,7 @@ export default function ProtectedExample() {
     const fetchBetaUsers = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`${import.meta.env.VITE_API_URL}beta_users`, {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/beta_users`, {
           credentials: "include",
         });
 
@@ -26,7 +26,8 @@ export default function ProtectedExample() {
 
         const data = await res.json();
         setBetaData(data);
-      } catch {
+      } catch (error) {
+        console.error("Failed make beta api call. Reason: ", error);
         setError(
           "The API rejected this request. This usually means the user does not have the required role.",
         );
