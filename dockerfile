@@ -1,14 +1,25 @@
-# Dev-focused container for Vite + React
-# This is NOT a production image
-FROM node:20-alpine
+FROM node:20-alpine AS builder
 
 WORKDIR /app
 
-COPY package.json package-lock.json* ./
-RUN npm install
+COPY package.json package-lock.json ./
+RUN npm ci
 
 COPY . .
 
-EXPOSE 5001
+RUN npm run build
 
-CMD ["npm", "run", "dev", "--", "--host"]
+
+FROM nginx:alpine
+
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+EXPOSE 80
+
+HEALTHCHECK CMD wget --no-verbose --tries=1 --spider http://localhost || exit 1
+
+CMD ["/entrypoint.sh"]
