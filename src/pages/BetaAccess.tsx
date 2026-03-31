@@ -1,5 +1,6 @@
 import { useAuth } from "@seamless-auth/react";
 import { useEffect, useState } from "react";
+import { API_URL } from "../lib/api";
 
 export default function ProtectedExample() {
   const { user, isAuthenticated } = useAuth();
@@ -16,7 +17,7 @@ export default function ProtectedExample() {
     const fetchBetaUsers = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/beta_users`, {
+        const res = await fetch(`${API_URL}/beta_users`, {
           credentials: "include",
         });
 

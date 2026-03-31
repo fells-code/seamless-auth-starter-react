@@ -7,8 +7,7 @@ import BetaAccess from "./pages/BetaAccess";
 import MainLayout from "./layouts/Layout";
 import About from "./pages/About";
 import Home from "./pages/Home";
-
-const AUTH_SERVER = import.meta.env.VITE_AUTH_SERVER_URL;
+import { API_URL } from "./lib/api";
 
 function ApplicationRoutes() {
   return (
@@ -26,7 +25,7 @@ function ApplicationRoutes() {
 const App = () => {
   return (
     <Router>
-      <AuthProvider apiHost={AUTH_SERVER} mode="web">
+      <AuthProvider apiHost={API_URL} mode="web">
         <ApplicationRoutes />
       </AuthProvider>
     </Router>
