@@ -25,7 +25,7 @@ function ApplicationRoutes() {
 const App = () => {
   return (
     <Router>
-      <AuthProvider apiHost={API_URL} mode="web">
+      <AuthProvider apiHost={API_URL} mode="server">
         <ApplicationRoutes />
       </AuthProvider>
     </Router>
