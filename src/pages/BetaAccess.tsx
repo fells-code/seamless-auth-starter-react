@@ -17,7 +17,7 @@ export default function ProtectedExample() {
     const fetchBetaUsers = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`${API_URL}/beta_users`, {
+        const res = await fetch(`${API_URL}beta_users`, {
           credentials: "include",
         });
 
