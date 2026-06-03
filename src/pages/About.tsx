@@ -18,15 +18,14 @@ export default function About() {
           </h2>
           <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
             Seamless Auth is a passwordless authentication system designed to be
-            embedded directly into your application. It avoids redirects,
-            external identity providers, and opaque session handling in favor of
-            explicit, self-hosted infrastructure.
+            embedded directly into your application. It supports passkeys,
+            magic links, email OTP, phone OTP, and optional OAuth providers
+            while keeping the auth server self-hostable and auditable.
           </p>
           <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-            Authentication state is managed using secure, HTTP-only cookies and
-            verified server-side by your API. This allows your frontend and
-            backend to share a consistent view of the user without exposing
-            sensitive tokens to the browser.
+            The React SDK manages auth state through `AuthProvider`, built-in
+            auth screens through `AuthRoutes`, and headless flows through
+            `useAuthClient` when you need custom UI.
           </p>
         </section>
 
@@ -42,8 +41,8 @@ export default function About() {
 
           <ul className="list-disc ml-6 text-gray-700 dark:text-gray-300 space-y-2">
             <li>Embedded login and logout using the Seamless Auth React SDK</li>
-            <li>Session-based authentication using HTTP-only cookies</li>
-            <li>Server-side session validation from an API</li>
+            <li>Passwordless authentication with built-in auth routes</li>
+            <li>Protected API calls through your application API</li>
             <li>Role-based access control using user roles</li>
             <li>A protected route accessible only to authenticated users</li>
           </ul>
@@ -82,7 +81,7 @@ export default function About() {
             <li>Explore how authentication state flows through the app</li>
             <li>Review how the API validates user sessions</li>
             <li>Experiment with roles and protected routes</li>
-            <li>Replace mock content with your own features</li>
+            <li>Replace mock content with your product routes</li>
           </ul>
         </section>
 

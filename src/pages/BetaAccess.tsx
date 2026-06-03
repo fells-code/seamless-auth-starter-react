@@ -1,31 +1,25 @@
 import { useAuth } from "@seamless-auth/react";
 import { useEffect, useState } from "react";
-import { API_URL } from "../lib/api";
+import { apiFetch } from "../lib/api";
 
 export default function ProtectedExample() {
-  const { user, isAuthenticated } = useAuth();
+  const { hasScopedRole, isAuthenticated, user } = useAuth();
 
   const [betaData, setBetaData] = useState<string[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const hasBetaRole = user?.roles?.includes("betaUser");
+  const hasBetaRole = hasScopedRole("betaUser") === true;
+  const userLabel = user?.email || user?.phone || user?.id;
 
   useEffect(() => {
-    if (!hasBetaRole) return;
+    if (!isAuthenticated || !hasBetaRole) return;
 
     const fetchBetaUsers = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`${API_URL}beta_users`, {
-          credentials: "include",
-        });
-
-        if (!res.ok) {
-          throw new Error("Request was rejected by the API");
-        }
-
-        const data = await res.json();
+        setError(null);
+        const data = await apiFetch<string[]>("/beta_users");
         setBetaData(data);
       } catch (error) {
         console.error("Failed make beta api call. Reason: ", error);
@@ -38,7 +32,7 @@ export default function ProtectedExample() {
     };
 
     fetchBetaUsers();
-  }, [hasBetaRole]);
+  }, [hasBetaRole, isAuthenticated]);
 
   if (!isAuthenticated) {
     return (
@@ -75,7 +69,7 @@ export default function ProtectedExample() {
           </h2>
           <p className="text-gray-700 dark:text-gray-300">
             You are currently signed in as{" "}
-            <span className="font-medium">{user?.email || user?.phone}</span>.
+            <span className="font-medium">{userLabel}</span>.
             Access to this page is restricted to authenticated users.
           </p>
         </section>

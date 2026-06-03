@@ -1,10 +1,10 @@
-import { Outlet } from "react-router";
+import type { ReactNode } from "react";
 
-export default function Login() {
+export default function Login({ children }: { children: ReactNode }) {
   return (
     <div className="flex min-h-screen bg-white dark:bg-black">
       <div
-        className="hidden lg:flex flex-col justify-center px-20 w-1/2 
+        className="hidden lg:flex flex-col justify-center px-20 w-1/2
         bg-gradient-to-b from-[#2169a8] to-black text-white"
       >
         <div className="max-w-xl space-y-8">
@@ -19,10 +19,9 @@ export default function Login() {
           </p>
 
           <p className="text-lg leading-relaxed opacity-90">
-            Authentication is embedded directly into the application. Sessions
-            are managed using secure, HTTP-only cookies and verified
-            server-side. No redirects or third-party identity providers are
-            involved.
+            Authentication is embedded directly into the application. The auth
+            server handles passwordless login flows while your application keeps
+            control of protected routes and API access.
           </p>
 
           <div className="pt-6 text-sm opacity-80">
@@ -44,7 +43,7 @@ export default function Login() {
 
       <div className="flex flex-col justify-center items-center w-full lg:w-1/2 px-6 sm:px-10">
         <div className="max-w-md w-full">
-          <Outlet />
+          {children}
 
           <p className="mt-10 text-sm text-center text-gray-600 dark:text-gray-400">
             Authentication and session management provided by Seamless Auth.
