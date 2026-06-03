@@ -2,7 +2,15 @@ import { AuthRoutes, useAuth } from "@seamless-auth/react";
 import { Link } from "react-router-dom";
 
 export default function Home() {
-  const { isAuthenticated, user } = useAuth();
+  const { isAuthenticated, loading, user } = useAuth();
+
+  if (loading) {
+    return (
+      <div className="max-w-xl mx-auto py-20 text-center text-gray-600 dark:text-gray-400">
+        Checking your session...
+      </div>
+    );
+  }
 
   if (!isAuthenticated) {
     return (
@@ -43,7 +51,7 @@ export default function Home() {
       <div className="rounded-lg border border-gray-200 dark:border-gray-800 p-4 bg-white dark:bg-gray-900">
         <p className="text-gray-700 dark:text-gray-300">Signed in as:</p>
 
-        <pre className="mt-2 text-sm text-gray-800 dark:text-gray-200">
+        <pre className="mt-2 text-sm text-gray-800 dark:text-gray-200 overflow-x-auto">
           {JSON.stringify(user, null, 2)}
         </pre>
       </div>

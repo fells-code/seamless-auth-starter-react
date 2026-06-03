@@ -4,7 +4,7 @@ import { Menu, X } from "lucide-react";
 import { useAuth } from "@seamless-auth/react";
 
 export default function Navbar() {
-  const { user, logout, isAuthenticated } = useAuth();
+  const { isAuthenticated, logout, user } = useAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -19,7 +19,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
         <Link
           to="/"
-          className="text-xl font-semibold text-white tracking-tight"
+          className="text-xl font-semibold text-gray-950 tracking-tight dark:text-white"
         >
           Seamless Auth - Template
         </Link>
@@ -44,6 +44,7 @@ export default function Navbar() {
               <button
                 onClick={() => setDropdownOpen(!dropdownOpen)}
                 className="h-9 w-9 rounded-full bg-[#2169a8] text-white flex items-center justify-center font-semibold"
+                aria-label="Open account menu"
               >
                 {user?.email?.[0]?.toUpperCase() ?? "U"}
               </button>
@@ -65,7 +66,7 @@ export default function Navbar() {
           ) : (
             <Link
               to="/login"
-              className="px-4 py-2 rounded-md text-sm bg-[#2169a8] text-white hover:bg-[#2169a8]-dark transition"
+              className="px-4 py-2 rounded-md text-sm bg-[#2169a8] text-white hover:bg-[#1a568a] transition"
             >
               Login
             </Link>
@@ -75,6 +76,7 @@ export default function Navbar() {
         <button
           className="md:hidden text-gray-700 dark:text-gray-300"
           onClick={() => setMobileOpen(!mobileOpen)}
+          aria-label="Toggle navigation"
         >
           {mobileOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -104,7 +106,7 @@ export default function Navbar() {
                   logout();
                   setMobileOpen(false);
                 }}
-                className="w-full px-4 py-2 rounded-md bg-[#2169a8] text-white hover:bg-[#2169a8]-dark transition"
+                className="w-full px-4 py-2 rounded-md bg-[#2169a8] text-white hover:bg-[#1a568a] transition"
               >
                 Logout
               </button>
@@ -113,7 +115,7 @@ export default function Navbar() {
             <Link
               to="/login"
               onClick={() => setMobileOpen(false)}
-              className="block w-full px-4 py-2 text-center rounded-md bg-[#2169a8] text-white hover:bg-[#2169a8]-dark transition"
+              className="block w-full px-4 py-2 text-center rounded-md bg-[#2169a8] text-white hover:bg-[#1a568a] transition"
             >
               Login
             </Link>

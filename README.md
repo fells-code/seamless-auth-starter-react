@@ -1,70 +1,95 @@
-# React + TypeScript + Vite + Seamless Auth
+# Seamless Auth React Starter
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-The project also utilized Seamless Auth in `simple` mode for authentication and authorization.
+A Vite + React starter for building applications with Seamless Auth.
 
-Currently, two official plugins are available:
+This starter is intended to be cloned directly by the Seamless CLI. It provides a minimal React app
+with the Seamless Auth React SDK already wired in, plus a protected route example that works with
+the companion Express starter.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## What This Starter Shows
 
-## Expanding the ESLint configuration
+- `AuthProvider` configured with the application API origin
+- Built-in Seamless Auth routes for registration and login
+- Passwordless authentication flows supported by the Seamless Auth backend
+- Protected routes with `useAuth()`
+- Role-based UI checks with `hasScopedRole()`
+- Protected app API calls through the companion Express starter
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Quick Start
 
-```js
-export default tseslint.config([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+```bash
+npm install
+cp .env.example .env
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The app expects an API origin in `.env`:
 
-```js
-// eslint.config.js
-import reactX from "eslint-plugin-react-x";
-import reactDom from "eslint-plugin-react-dom";
-
-export default tseslint.config([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs["recommended-typescript"],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+```text
+VITE_API_URL=http://localhost:3000/
 ```
+
+The companion Express starter mounts the Seamless Auth adapter at `/auth`, so the React SDK sends
+auth requests to `${VITE_API_URL}/auth/...`.
+
+## Seamless Auth Wiring
+
+Wrap the app with `AuthProvider`:
+
+```tsx
+<AuthProvider apiHost={API_URL}>
+  <AppRoutes />
+</AuthProvider>
+```
+
+The SDK owns auth state and exposes it through `useAuth()`:
+
+```tsx
+const { isAuthenticated, user, logout } = useAuth();
+```
+
+The starter also mounts the SDK-provided auth screens through `AuthRoutes`. App routes remain
+responsible for deciding which pages require authentication.
+
+## Routes
+
+Application routes:
+
+- `/`
+- `/about`
+- `/beta`
+
+Auth routes handled by the Seamless Auth React SDK include:
+
+- `/login`
+- `/passKeyLogin`
+- `/verifyPhoneOTP`
+- `/verifyEmailOTP`
+- `/verify-magiclink`
+- `/registerPasskey`
+- `/magiclinks-sent`
+
+`/beta` is protected and checks for the `betaUser` role before calling the example API route.
+
+## Scripts
+
+```bash
+npm run dev
+npm run lint
+npm run build
+npm run preview
+```
+
+## Docker
+
+The production image builds the Vite app and serves it with nginx. Runtime config is written to
+`/usr/share/nginx/html/config.js` from the container `API_URL` environment variable.
+
+```bash
+docker build -t seamless-auth-react-starter .
+docker run --rm -p 8080:80 -e API_URL=http://localhost:3000/ seamless-auth-react-starter
+```
+
+## License
+
+AGPL-3.0-only

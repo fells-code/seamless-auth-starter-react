@@ -8,6 +8,13 @@ import { getApiUrl } from "./runtimeConfig";
 
 export const API_URL = getApiUrl();
 
+export function buildApiUrl(path: string): string {
+  const baseUrl = API_URL.replace(/\/+$/, "");
+  const normalizedPath = path.startsWith("/") ? path : `/${path}`;
+
+  return `${baseUrl}${normalizedPath}`;
+}
+
 export async function apiFetch<T>(
   path: string,
   options: RequestInit = {},
@@ -16,7 +23,7 @@ export async function apiFetch<T>(
 
   headers.set("Content-Type", "application/json");
 
-  const res = await fetch(`${API_URL}${path}`, {
+  const res = await fetch(buildApiUrl(path), {
     credentials: "include",
     ...options,
     headers,
