@@ -15,6 +15,20 @@ the companion Express starter.
 - Role-based UI checks with `hasScopedRole()`
 - Protected app API calls through the companion Express starter
 
+## Template Variants
+
+The repository root remains the default auth-routes starter used by the current
+Seamless CLI flow. Additional copy-ready variants live under `templates/`:
+
+- `templates/headless` builds custom auth UI with `useAuthClient()`,
+  `useAuth()`, and `usePasskeySupport()`.
+- `templates/oauth` adds dynamic OAuth provider buttons, a
+  `/oauth/callback` route, and passkey sign-in.
+
+Each variant is a complete Vite app with its own `package.json`, Docker files,
+runtime config, and README so the CLI can copy the selected directory into
+`web/`.
+
 ## Quick Start
 
 ```bash
